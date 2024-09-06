@@ -1,5 +1,6 @@
 package elocin.shield_overhaul;
 
+import elocin.shield_overhaul.networking.PacketRegistry;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ public class ShieldOverhaul implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		PacketRegistry.registerC2S();
 		LOGGER.info("Shield Overhaul Initialised!");
 	}
 }
