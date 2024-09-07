@@ -1,5 +1,6 @@
 package elocin.shield_overhaul.networking;
 
+import elocin.shield_overhaul.util.ShieldUtils;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -17,9 +18,7 @@ public class HoldEndC2SPacket {
         if (stack.getNbt() == null) stack.getOrCreateNbt();
         if (!(stack.getItem() instanceof ShieldItem item) || !stack.getNbt().getBoolean("holdStarted")) return;
         stack.getNbt().putBoolean("holdStarted", false);
-        player.sendMessage(Text.of("Released!"));
-        if (!player.isBlocking()) return;
-        player.sendMessage(Text.of("Parry!"));
-        player.sendMessage(Text.of(""));
+        if (player.isBlocking()) return;
+        ShieldUtils.setParryWindow(stack, player);
     }
 }

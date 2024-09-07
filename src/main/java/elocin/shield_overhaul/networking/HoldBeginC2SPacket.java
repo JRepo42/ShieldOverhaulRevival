@@ -1,5 +1,7 @@
 package elocin.shield_overhaul.networking;
 
+import elocin.shield_overhaul.ShieldOverhaul;
+import elocin.shield_overhaul.util.ShieldUtils;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -17,6 +19,5 @@ public class HoldBeginC2SPacket {
         if (stack.getNbt() == null) stack.getOrCreateNbt();
         if (!(stack.getItem() instanceof ShieldItem item) || stack.getNbt().getBoolean("holdStarted")) return;
         stack.getNbt().putBoolean("holdStarted", true);
-        player.sendMessage(Text.of("Begin held!"));
     }
 }

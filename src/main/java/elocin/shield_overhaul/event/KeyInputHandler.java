@@ -1,6 +1,7 @@
 package elocin.shield_overhaul.event;
 
 import elocin.shield_overhaul.networking.PacketRegistry;
+import elocin.shield_overhaul.util.ShieldUtils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -14,7 +15,7 @@ public class KeyInputHandler {
     public static void registerKeyInputs() {
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
             if (client.player == null) return;
-            ItemStack stack = client.player.getEquippedStack(EquipmentSlot.MAINHAND);
+            ItemStack stack = client.player.getStackInHand(client.player.getActiveHand());
             if (!(stack.getItem() instanceof ShieldItem)) return;
 
             if (client.options.useKey.isPressed() && client.options.useKey.wasPressed()) {
@@ -22,6 +23,11 @@ public class KeyInputHandler {
             } else if (!client.options.useKey.isPressed() && stack.getNbt().getBoolean("holdStarted")) {
                 ClientPlayNetworking.send(PacketRegistry.HOLD_END, PacketByteBufs.empty());
             }
+
+            if (ShieldUtils.isParrying(stack, client.player)) {
+                client.player.sendMessage(Text.of("Parrying!"));
+            }
+
         });
     }
 
