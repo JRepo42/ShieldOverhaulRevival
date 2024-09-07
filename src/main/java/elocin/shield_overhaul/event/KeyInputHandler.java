@@ -23,11 +23,6 @@ public class KeyInputHandler {
             } else if (!client.options.useKey.isPressed() && stack.getNbt().getBoolean("holdStarted")) {
                 ClientPlayNetworking.send(PacketRegistry.HOLD_END, PacketByteBufs.empty());
             }
-
-            if (ShieldUtils.isParrying(stack, client.player)) {
-                client.player.sendMessage(Text.of("Parrying!"));
-            }
-
         });
     }
 

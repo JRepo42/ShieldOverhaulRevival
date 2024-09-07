@@ -1,11 +1,10 @@
 package elocin.shield_overhaul.util;
 
-import elocin.shield_overhaul.ShieldOverhaul;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShieldItem;
 
 public class ShieldUtils {
+    // Todo: config, cooldown on parry so that you can't just spam
     private static final String PARRY_WINDOW = "parry_window";
 
     public static boolean isParrying(ItemStack stack, PlayerEntity player) {
@@ -17,6 +16,7 @@ public class ShieldUtils {
     }
 
     public static long getParryWindow(ItemStack stack) {
+        if (stack.getNbt() == null) return 0;
         return stack.getNbt().getLong(PARRY_WINDOW);
     }
 }
