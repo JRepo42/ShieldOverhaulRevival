@@ -43,7 +43,7 @@ public class StunStarParticle extends SpriteBillboardParticle {
 
             stunStarParticle.setAlpha(1.0F);
             stunStarParticle.scale(2f);
-            stunStarParticle.setMaxAge(200);
+            stunStarParticle.setMaxAge(20);
             stunStarParticle.setVelocity(0, 0 ,0);
 
             stunStarParticle.setSprite(this.spriteProvider);
