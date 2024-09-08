@@ -29,13 +29,13 @@ public class ParryDamageMixin {
 		|| ShieldUtils.isParrying(player.getOffHandStack(), player);
 	}
 
-	@Inject(at = @At("TAIL"), method = "takeShieldHit", cancellable = true)
+	@Inject(at = @At("TAIL"), method = "takeShieldHit")
 	protected void shield_overhaul$takeShieldHit(LivingEntity attacker, CallbackInfo ci) {
 		if (!((LivingEntity)(Object) this instanceof PlayerEntity player)) return;
 		if (ShieldUtils.isParrying(player.getMainHandStack(), player)
 		|| ShieldUtils.isParrying(player.getOffHandStack(), player)) {
 			player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_ANVIL_LAND, player.getSoundCategory(), 1.0f, 2.0f);
-			attacker.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, 20, 5));
+			attacker.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, 100, 0));
 		}
 	}
 }
