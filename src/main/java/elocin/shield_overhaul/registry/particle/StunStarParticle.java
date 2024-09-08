@@ -10,11 +10,11 @@ public class StunStarParticle extends SpriteBillboardParticle {
     protected float speed = 0.5f;
     protected float radius = 0.5f;
 
-    private float initialX = 0;
-    private float initialY = 0;
-    private float initialZ = 0;
+    private double initialX;
+    private double initialY;
+    private double initialZ;
 
-    protected StunStarParticle(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+    public StunStarParticle(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
         super(clientWorld, d, e, f, g, h, i);
     }
 
@@ -23,6 +23,7 @@ public class StunStarParticle extends SpriteBillboardParticle {
         super.tick();
         this.setPos(initialX + Math.cos(this.age * speed) * radius, initialY, initialZ + Math.sin(this.age * speed) * radius);
     }
+
 
     @Override
     public ParticleTextureSheet getType() {
@@ -39,15 +40,19 @@ public class StunStarParticle extends SpriteBillboardParticle {
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
             StunStarParticle stunStarParticle = new StunStarParticle(clientWorld, d, e, f, g, h, i);
+
             stunStarParticle.setAlpha(1.0F);
             stunStarParticle.scale(2f);
             stunStarParticle.setMaxAge(200);
             stunStarParticle.setVelocity(0, 0 ,0);
+
             stunStarParticle.setSprite(this.spriteProvider);
 
-            stunStarParticle.initialX = (float) d;
-            stunStarParticle.initialY = (float) e;
-            stunStarParticle.initialZ = (float) f;
+            stunStarParticle.setPos(d, e, f);
+            stunStarParticle.initialX = d;
+            stunStarParticle.initialY = e;
+            stunStarParticle.initialZ = f;
+
             return stunStarParticle;
         }
     }
