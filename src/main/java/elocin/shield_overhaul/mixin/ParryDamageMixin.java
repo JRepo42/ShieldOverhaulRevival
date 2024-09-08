@@ -2,9 +2,12 @@ package elocin.shield_overhaul.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import elocin.shield_overhaul.ShieldOverhaul;
+import elocin.shield_overhaul.effect.EffectRegistry;
 import elocin.shield_overhaul.util.ShieldUtils;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.MinecraftServer;
@@ -32,7 +35,7 @@ public class ParryDamageMixin {
 		if (ShieldUtils.isParrying(player.getMainHandStack(), player)
 		|| ShieldUtils.isParrying(player.getOffHandStack(), player)) {
 			player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_ANVIL_LAND, player.getSoundCategory(), 1.0f, 2.0f);
-			// Todo: stun attacker
+			attacker.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, 20, 5));
 		}
 	}
 }
