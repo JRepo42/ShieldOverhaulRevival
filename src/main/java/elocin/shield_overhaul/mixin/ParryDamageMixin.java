@@ -35,7 +35,7 @@ public class ParryDamageMixin {
 		if (ShieldUtils.isParrying(player.getMainHandStack(), player)
 		|| ShieldUtils.isParrying(player.getOffHandStack(), player)) {
 			player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_ANVIL_LAND, player.getSoundCategory(), 1.0f, 2.0f);
-			attacker.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, 100, 0));
+			attacker.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, 20, 0, false, false));
 		}
 	}
 }
