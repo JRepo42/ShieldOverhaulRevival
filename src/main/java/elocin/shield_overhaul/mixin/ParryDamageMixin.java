@@ -1,5 +1,6 @@
 package elocin.shield_overhaul.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import elocin.shield_overhaul.ShieldOverhaul;
 import elocin.shield_overhaul.util.ShieldUtils;
 import net.minecraft.entity.LivingEntity;
@@ -16,18 +17,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public class ParryDamageMixin {
-	@Inject(at = @At("HEAD"), method = "modifyAppliedDamage", cancellable = true)
-	private void shield_overhaul$modifyAppliedDamage(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
+	@ModifyExpressionValue(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;blockedByShield(Lnet/minecraft/entity/damage/DamageSource;)Z"))
+	private boolean shield_overhaul$blockedByShield(boolean original) {
+		if (!((LivingEntity)(Object) this instanceof PlayerEntity player)) return original;
+
+		return original ||
+		ShieldUtils.isParrying(player.getMainHandStack(), player)
+		|| ShieldUtils.isParrying(player.getOffHandStack(), player);
+	}
+
+	@Inject(at = @At("TAIL"), method = "takeShieldHit", cancellable = true)
+	protected void shield_overhaul$takeShieldHit(LivingEntity attacker, CallbackInfo ci) {
 		if (!((LivingEntity)(Object) this instanceof PlayerEntity player)) return;
-		if (source.isIn(DamageTypeTags.BYPASSES_EFFECTS)) return;
-
-		if (ShieldUtils.isParrying(player.getMainHandStack(), player) || ShieldUtils.isParrying(player.getOffHandStack(), player)) {
-			if (source.getAttacker() != null) {
-				// stun attacker
-			}
-
+		if (ShieldUtils.isParrying(player.getMainHandStack(), player)
+		|| ShieldUtils.isParrying(player.getOffHandStack(), player)) {
 			player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_ANVIL_LAND, player.getSoundCategory(), 1.0f, 2.0f);
-			cir.setReturnValue(0f);
+			// Todo: stun attacker
 		}
 	}
 }
