@@ -2,7 +2,7 @@ package elocin.shield_overhaul;
 
 import elocin.shield_overhaul.effect.EffectRegistry;
 import elocin.shield_overhaul.networking.PacketRegistry;
-import elocin.shield_overhaul.registry.ParticleRegistry;
+import elocin.shield_overhaul.registry.particle.ParticleRegistry;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;

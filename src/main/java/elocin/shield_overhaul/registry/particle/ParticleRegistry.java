@@ -1,4 +1,4 @@
-package elocin.shield_overhaul.registry;
+package elocin.shield_overhaul.registry.particle;
 
 import elocin.shield_overhaul.ShieldOverhaul;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
