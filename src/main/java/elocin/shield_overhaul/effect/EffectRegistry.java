@@ -11,6 +11,8 @@ import net.minecraft.util.Identifier;
 public class EffectRegistry {
     public static final StatusEffect STUN = new StunEffect().addAttributeModifier(
     EntityAttributes.GENERIC_MOVEMENT_SPEED, "be7f1afd-03fd-4d54-9f5d-9620603d3041", -1.0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+    ).addAttributeModifier(
+    EntityAttributes.GENERIC_ATTACK_DAMAGE, "650f237b-c7b7-47dc-8dd4-7b2ae73dabb2", -1.0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL
     );
 
     public static void initialize() {
