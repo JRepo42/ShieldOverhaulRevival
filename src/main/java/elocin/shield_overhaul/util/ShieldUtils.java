@@ -13,19 +13,19 @@ public class ShieldUtils {
     }
 
     public static void setParryWindow(ItemStack stack, PlayerEntity player) {
-        stack.getNbt().putLong(PARRY_WINDOW, player.getWorld().getTime() + 20);
+        stack.getNbt().putLong(PARRY_WINDOW, player.getWorld().getTime() + getParryDuration());
     }
 
     public static int getParryDuration() {
-        return 20;
+        return (int) (ShieldOverhaul.CONFIG.parry_duration_secs * 20);
     }
 
     public static int getParryCooldown() {
-        return 10;
+        return (int) (ShieldOverhaul.CONFIG.parry_cooldown_secs * 20);
     }
 
-    public static float getStunDuration() {
-        return ShieldOverhaul.CONFIG.parry_stun_duration_secs * 20;
+    public static int getStunDuration() {
+        return (int) (ShieldOverhaul.CONFIG.parry_stun_duration_secs * 20);
     }
 
     public static long getParryWindow(ItemStack stack) {

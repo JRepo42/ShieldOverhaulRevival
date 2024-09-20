@@ -15,6 +15,6 @@ public class ConfigEntries {
     public boolean enable_parrying = true;
     public boolean enable_parry_abuse_prevention = true;
     public float parry_cooldown_secs = 0.5F;
-    public float parry_window_secs = 1F;
+    public float parry_duration_secs = 1F;
     public float parry_stun_duration_secs = 1F;
 }
