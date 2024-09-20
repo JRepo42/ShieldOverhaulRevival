@@ -16,6 +16,17 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+
+	mavenCentral()
+	maven {
+		name "zigythebirdMods"
+		url "https://maven.zigythebird.com/mods"
+	}
+	maven {
+		name "KosmX's maven"
+		url 'https://maven.kosmx.dev/'
+	}
+	maven { url "https://maven.terraformersmc.com/releases" }
 }
 
 dependencies {
@@ -26,7 +37,16 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	
+
+	// Todo: remove include
+	include modImplementation ("com.zigythebird.playeranimatorapi:playeranimatorapi-fabric-1.20.1:2.1.1", {
+		exclude group: "software.bernie.geckolib"
+		exclude group: "com.github.Virtuoel"
+		exclude group: "mod.azure.azurelib"
+		exclude group: "com.eliotlash.mclib"
+		exclude group: "net.fabricmc.fabric-api"
+		exclude group: "maven.modrinth"
+	})
 }
 
 processResources {
