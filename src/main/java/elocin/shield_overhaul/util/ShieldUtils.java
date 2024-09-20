@@ -15,6 +15,14 @@ public class ShieldUtils {
         stack.getNbt().putLong(PARRY_WINDOW, player.getWorld().getTime() + 20);
     }
 
+    public static int getParryDuration() {
+        return 20;
+    }
+
+    public static int getParryCooldown() {
+        return 10;
+    }
+
     public static long getParryWindow(ItemStack stack) {
         if (stack.getNbt() == null) return 0;
         return stack.getNbt().getLong(PARRY_WINDOW);
