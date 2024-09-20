@@ -23,6 +23,10 @@ public class ShieldUtils {
         return 10;
     }
 
+    public static int getStunDuration() {
+        return 20;
+    }
+
     public static long getParryWindow(ItemStack stack) {
         if (stack.getNbt() == null) return 0;
         return stack.getNbt().getLong(PARRY_WINDOW);
