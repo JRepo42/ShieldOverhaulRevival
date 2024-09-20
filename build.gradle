@@ -39,7 +39,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Todo: remove include
-	include modImplementation ("com.zigythebird.playeranimatorapi:playeranimatorapi-fabric-1.20.1:2.1.1", {
+	include modImplementation ("com.zigythebird.playeranimatorapi:playeranimatorapi-fabric-1.20.1:2.1.0", {
 		exclude group: "software.bernie.geckolib"
 		exclude group: "com.github.Virtuoel"
 		exclude group: "mod.azure.azurelib"

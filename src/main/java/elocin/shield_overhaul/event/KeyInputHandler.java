@@ -1,14 +1,11 @@
 package elocin.shield_overhaul.event;
 
 import elocin.shield_overhaul.networking.PacketRegistry;
-import elocin.shield_overhaul.util.ShieldUtils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
-import net.minecraft.text.Text;
 
 public class KeyInputHandler {
 

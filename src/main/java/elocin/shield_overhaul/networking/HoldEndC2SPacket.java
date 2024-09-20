@@ -1,5 +1,8 @@
 package elocin.shield_overhaul.networking;
 
+import com.zigythebird.playeranimatorapi.API.PlayerAnimAPI;
+import elocin.shield_overhaul.registry.animation.AnimConstants;
+import elocin.shield_overhaul.util.AnimUtils;
 import elocin.shield_overhaul.util.ShieldUtils;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.entity.EquipmentSlot;
@@ -19,5 +22,6 @@ public class HoldEndC2SPacket {
         stack.getNbt().putBoolean("holdStarted", false);
         if (player.isBlocking() || ShieldUtils.isParrying(stack, player)) return;
         ShieldUtils.setParryWindow(stack, player);
+        AnimUtils.playAnimation(player.getServerWorld(), player, AnimConstants.PARRY_RIGHT);
     }
 }
