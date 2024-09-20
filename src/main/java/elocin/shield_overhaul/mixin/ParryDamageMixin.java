@@ -45,7 +45,7 @@ public class ParryDamageMixin {
 			}
 
 			if (attacker instanceof CreeperEntity) return;
-			attacker.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, ShieldUtils.getStunDuration(), 0, false, false));
+			attacker.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, (int) ShieldUtils.getStunDuration(), 0, false, false));
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package elocin.shield_overhaul.util;
 
+import elocin.shield_overhaul.ShieldOverhaul;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
@@ -23,8 +24,8 @@ public class ShieldUtils {
         return 10;
     }
 
-    public static int getStunDuration() {
-        return 20;
+    public static float getStunDuration() {
+        return ShieldOverhaul.CONFIG.parry_stun_duration_secs * 20;
     }
 
     public static long getParryWindow(ItemStack stack) {
