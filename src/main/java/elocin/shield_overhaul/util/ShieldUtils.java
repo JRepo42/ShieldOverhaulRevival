@@ -5,7 +5,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 public class ShieldUtils {
-    // Todo: config, cooldown on parry so that you can't just spam
     private static final String PARRY_WINDOW = "parry_window";
 
     public static boolean isParrying(ItemStack stack, PlayerEntity player) {
