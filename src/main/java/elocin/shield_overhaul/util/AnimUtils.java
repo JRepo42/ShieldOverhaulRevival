@@ -36,5 +36,4 @@ public class AnimUtils {
                 PlayerParts.allEnabled, modifiers,
                 0, 1, 1000, true);
     }
-
 }
