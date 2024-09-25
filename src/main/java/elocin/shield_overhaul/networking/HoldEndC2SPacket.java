@@ -23,6 +23,6 @@ public class HoldEndC2SPacket {
         if (player.isBlocking() || ShieldUtils.isParrying(stack, player) || player.getItemCooldownManager().isCoolingDown(item)) return;
         ShieldUtils.setParryWindow(stack, player);
         player.getItemCooldownManager().set(item, ShieldUtils.getParryDuration() + ShieldUtils.getParryCooldown());
-        AnimUtils.playAnimation(player.getServerWorld(), player, AnimConstants.PARRY_RIGHT);
+        AnimUtils.playParryAnim(player.getServerWorld(), player);
     }
 }
