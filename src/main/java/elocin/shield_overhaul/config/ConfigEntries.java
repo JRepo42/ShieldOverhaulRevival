@@ -8,6 +8,7 @@ public class ConfigEntries {
     public boolean enable_instant_shield_use = true;
     public boolean add_stun_immunity = true;
     public boolean enable_parrying = true;
+    public boolean enable_bashing = true;
     public boolean bash_only_on_ground = true;
     public boolean bosses_immune_to_stun = true;
     public float parry_duration_secs = 1F;
