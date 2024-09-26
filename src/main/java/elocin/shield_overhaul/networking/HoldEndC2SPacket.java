@@ -20,7 +20,7 @@ public class HoldEndC2SPacket {
         if (stack.getNbt() == null) stack.getOrCreateNbt();
         if (!(stack.getItem() instanceof ShieldItem item) || !stack.getNbt().getBoolean("holdStarted")) return;
         stack.getNbt().putBoolean("holdStarted", false);
-        if (player.isBlocking() || ShieldUtils.isParrying(stack, player) || player.getItemCooldownManager().isCoolingDown(item)) return;
+        if (player.getItemUseTime() > 5 || ShieldUtils.isParrying(stack, player) || player.getItemCooldownManager().isCoolingDown(item)) return;
         ShieldUtils.setParryWindow(stack, player);
         player.getItemCooldownManager().set(item, ShieldUtils.getParryDuration() + ShieldUtils.getParryCooldown());
         AnimUtils.playParryAnim(player.getServerWorld(), player);
