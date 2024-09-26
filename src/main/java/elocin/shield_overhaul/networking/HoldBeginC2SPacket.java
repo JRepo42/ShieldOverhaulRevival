@@ -14,9 +14,11 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class HoldBeginC2SPacket {
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                                PacketByteBuf buf, PacketSender responseSender) {
-        ItemStack stack = player.getStackInHand(player.getActiveHand());
-        if (stack.getNbt() == null) stack.getOrCreateNbt();
-        if (!(stack.getItem() instanceof ShieldItem) || stack.getNbt().getBoolean("holdStarted")) return;
-        stack.getNbt().putBoolean("holdStarted", true);
+        server.execute(() -> {
+            ItemStack stack = player.getStackInHand(player.getActiveHand());
+            if (stack.getNbt() == null) stack.getOrCreateNbt();
+            if (!(stack.getItem() instanceof ShieldItem) || stack.getNbt().getBoolean("holdStarted")) return;
+            stack.getNbt().putBoolean("holdStarted", true);
+        });
     }
 }

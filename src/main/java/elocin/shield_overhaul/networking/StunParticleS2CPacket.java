@@ -13,13 +13,15 @@ public class StunParticleS2CPacket {
         Entity entity = client.world.getEntityById(buf.readInt());
         if (entity == null) return;
 
-        client.world.addParticle(
-                ParticleRegistry.STUN_STAR,
-                entity.getX(),
-                entity.getY() + entity.getBoundingBox().getYLength(),
-                entity.getZ(),
-                0,
-                0,
-                0);
+        client.execute(() -> {
+            client.world.addParticle(
+                    ParticleRegistry.STUN_STAR,
+                    entity.getX(),
+                    entity.getY() + entity.getBoundingBox().getYLength(),
+                    entity.getZ(),
+                    0,
+                    0,
+                    0);
+        });
     }
 }

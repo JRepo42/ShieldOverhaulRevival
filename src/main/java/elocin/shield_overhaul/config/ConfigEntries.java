@@ -9,7 +9,6 @@ public class ConfigEntries {
     public boolean add_stun_immunity = true;
     public boolean enable_parrying = true;
     public boolean bash_only_on_ground = true;
-    public boolean enable_parry_abuse_prevention = true;
     public boolean bosses_immune_to_stun = true;
     public float parry_duration_secs = 1F;
     public float parry_cooldown_secs = 0.5F;
