@@ -49,16 +49,7 @@ public class ParryMechanicsMixin {
 		if (!((LivingEntity)(Object) this instanceof PlayerEntity player)) return;
 		if (ShieldUtils.isParrying(player.getMainHandStack(), player)
 		|| ShieldUtils.isParrying(player.getOffHandStack(), player)) {
-			player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_ANVIL_LAND, player.getSoundCategory(), 1.0f, 2.0f);
-
-			if (ShieldUtils.isParrying(player.getMainHandStack(), player)) {
-				player.getItemCooldownManager().remove(player.getStackInHand(Hand.MAIN_HAND).getItem());
-			} else {
-				player.getItemCooldownManager().remove(player.getStackInHand(Hand.OFF_HAND).getItem());
-			}
-
-			if (attacker instanceof CreeperEntity) return;
-			attacker.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, ShieldUtils.getStunDuration(), 0, false, false));
+			ShieldUtils.stunParry(player, attacker);
 		}
 	}
 }
