@@ -38,14 +38,17 @@ public class ShieldUtils {
         return stack.getNbt().getLong(PARRY_WINDOW);
     }
 
-    public static void stunParry(PlayerEntity player, LivingEntity attacker) {
-        player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_ANVIL_LAND, player.getSoundCategory(), 1.0f, 2.0f);
-
+    public static void removeParryCooldown(PlayerEntity player) {
         if (ShieldUtils.isParrying(player.getMainHandStack(), player)) {
             player.getItemCooldownManager().remove(player.getStackInHand(Hand.MAIN_HAND).getItem());
         } else {
             player.getItemCooldownManager().remove(player.getStackInHand(Hand.OFF_HAND).getItem());
         }
+    }
+
+    public static void stunParry(PlayerEntity player, LivingEntity attacker) {
+        player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_ANVIL_LAND, player.getSoundCategory(), 1.0f, 2.0f);
+        removeParryCooldown(player);
 
         if (attacker == null || attacker instanceof CreeperEntity) return;
         attacker.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, ShieldUtils.getStunDuration(), 0, false, false));
