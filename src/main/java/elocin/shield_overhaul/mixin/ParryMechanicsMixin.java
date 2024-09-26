@@ -28,8 +28,8 @@ public class ParryMechanicsMixin {
 	private void isStunned(CallbackInfoReturnable<Boolean> cir) {
 		LivingEntity entity = (LivingEntity)(Object)this;
 		if(entity.hasStatusEffect(EffectRegistry.STUN)) {
-		if (ShieldOverhaul.CONFIG.bosses_immune_to_stun && (entity instanceof WitherEntity || entity instanceof WardenEntity || entity instanceof EnderDragonEntity)) return;
-			cir.setReturnValue(true);;
+			if (ShieldOverhaul.CONFIG.bosses_immune_to_stun && (entity instanceof WitherEntity || entity instanceof WardenEntity || entity instanceof EnderDragonEntity)) return;
+			cir.setReturnValue(true);
 		}
 	}
 
