@@ -31,7 +31,6 @@ public class AnimUtils {
             modifiers.add(mirror);
         }
 
-        ShieldOverhaul.LOGGER.info(String.valueOf(1 / ShieldOverhaul.CONFIG.parry_duration_secs));
         PlayerAnimAPI.playPlayerAnim(world, player, AnimConstants.PARRY_RIGHT,
                 PlayerParts.allEnabled, modifiers,
                 0, 1, 1000, true);
