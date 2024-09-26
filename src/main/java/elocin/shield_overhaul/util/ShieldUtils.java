@@ -3,8 +3,11 @@ package elocin.shield_overhaul.util;
 import elocin.shield_overhaul.ShieldOverhaul;
 import elocin.shield_overhaul.effect.EffectRegistry;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.WardenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;
@@ -51,6 +54,7 @@ public class ShieldUtils {
         removeParryCooldown(player);
 
         if (attacker == null || attacker instanceof CreeperEntity) return;
+        if (ShieldOverhaul.CONFIG.bosses_immune_to_stun && (attacker instanceof WitherEntity || attacker instanceof WardenEntity || attacker instanceof EnderDragonEntity)) return;
         attacker.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, ShieldUtils.getStunDuration(), 0, false, false));
     }
 }

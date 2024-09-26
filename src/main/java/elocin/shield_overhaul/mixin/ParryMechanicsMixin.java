@@ -5,8 +5,11 @@ import elocin.shield_overhaul.ShieldOverhaul;
 import elocin.shield_overhaul.effect.EffectRegistry;
 import elocin.shield_overhaul.util.ShieldUtils;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.WardenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
@@ -25,6 +28,7 @@ public class ParryMechanicsMixin {
 	private void isStunned(CallbackInfoReturnable<Boolean> cir) {
 		LivingEntity entity = (LivingEntity)(Object)this;
 		if(entity.hasStatusEffect(EffectRegistry.STUN)) {
+		if (ShieldOverhaul.CONFIG.bosses_immune_to_stun && (entity instanceof WitherEntity || entity instanceof WardenEntity || entity instanceof EnderDragonEntity)) return;
 			cir.setReturnValue(true);;
 		}
 	}
