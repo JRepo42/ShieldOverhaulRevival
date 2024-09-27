@@ -1,4 +1,5 @@
 {
-  "effect.shield_overhaul.stun":"Stunned",
-  "effect.shield_overhaul.stun.description":"Target is unable to move, use items or attack."
+  "enchantment.shield_overhaul.vigor": "Vigor",
+  "effect.shield_overhaul.stun": "Stunned",
+  "effect.shield_overhaul.stun.description": "Target is unable to move, use items or attack."
 }

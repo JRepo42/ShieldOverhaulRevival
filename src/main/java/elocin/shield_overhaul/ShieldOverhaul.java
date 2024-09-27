@@ -4,6 +4,7 @@ import elocin.shield_overhaul.config.ConfigBuilder;
 import elocin.shield_overhaul.config.ConfigEntries;
 import elocin.shield_overhaul.effect.EffectRegistry;
 import elocin.shield_overhaul.networking.PacketRegistry;
+import elocin.shield_overhaul.registry.enchantment.EnchantmentRegistry;
 import elocin.shield_overhaul.registry.entity.EntityRegistry;
 import elocin.shield_overhaul.registry.particle.ParticleRegistry;
 import net.fabricmc.api.ModInitializer;
@@ -24,5 +25,6 @@ public class ShieldOverhaul implements ModInitializer {
 		EffectRegistry.initialize();
 		ParticleRegistry.initialize();
 		EntityRegistry.initialize();
+		EnchantmentRegistry.initialize();
 	}
 }
