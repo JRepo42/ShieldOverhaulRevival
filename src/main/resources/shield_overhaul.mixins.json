@@ -5,6 +5,7 @@
 	"mixins": [
 		"CursorIconMixin",
 		"EnchantmentMixin",
+		"FireAspectMixin",
 		"ParryMechanicsMixin"
 	],
 	"injectors": {

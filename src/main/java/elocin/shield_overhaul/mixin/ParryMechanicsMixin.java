@@ -23,7 +23,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public class ParryMechanicsMixin {
-
 	@Inject(method = "isImmobile", at = @At(value = "HEAD"), cancellable = true)
 	private void isStunned(CallbackInfoReturnable<Boolean> cir) {
 		LivingEntity entity = (LivingEntity)(Object)this;
