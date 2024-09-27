@@ -3,7 +3,8 @@
 	"package": "elocin.shield_overhaul.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-      "ParryMechanicsMixin"
+      "ParryMechanicsMixin",
+	  "CursorIconMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
