@@ -9,6 +9,7 @@ import elocin.shield_overhaul.registry.entity.ShieldBashEntity;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
@@ -74,7 +75,7 @@ public class ShieldUtils {
 
         EnchantmentEnums enchantmentEnum = EnchantmentEnums.DEFAULT;
 
-        if (EnchantmentHelper.getLevel(EnchantmentRegistry.FLAMEBORN, stack) > 0) {
+        if (EnchantmentHelper.getLevel(Enchantments.FIRE_ASPECT, stack) > 0) {
             if (player.getRandom().nextBetween(0, 1) < ShieldOverhaul.CONFIG.flameborn_chance_decimal) {
                 attacker.setOnFireFor((int) (ShieldOverhaul.CONFIG.flameborn_on_fire_time_secs));
                 enchantmentEnum = EnchantmentEnums.FLAMEBORN;
