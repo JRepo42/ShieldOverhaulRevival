@@ -1,5 +1,6 @@
 package elocin.shield_overhaul.event;
 
+import elocin.shield_overhaul.ShieldOverhaul;
 import elocin.shield_overhaul.networking.PacketRegistry;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -14,6 +15,12 @@ public class KeyInputHandler {
             if (client.player == null) return;
             ItemStack stack = client.player.getStackInHand(client.player.getActiveHand());
             if (!(stack.getItem() instanceof ShieldItem)) return;
+
+            if (client.player.isBlocking()) {
+                if (client.options.attackKey.isPressed() && client.options.attackKey.wasPressed()) {
+                    ClientPlayNetworking.send(PacketRegistry.SHIELD_BASH, PacketByteBufs.empty());
+                }
+            }
 
             if (client.options.useKey.isPressed() && client.options.useKey.wasPressed()) {
                 ClientPlayNetworking.send(PacketRegistry.HOLD_BEGIN, PacketByteBufs.empty());

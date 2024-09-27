@@ -2,6 +2,7 @@ package elocin.shield_overhaul.registry.entity;
 
 import elocin.shield_overhaul.ShieldOverhaul;
 import elocin.shield_overhaul.effect.EffectRegistry;
+import elocin.shield_overhaul.util.ShieldUtils;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -43,7 +44,9 @@ public class ShieldBashEntity extends PersistentProjectileEntity {
         if (this.getWorld().isClient) return;
 
         if (entityHitResult.getEntity() instanceof LivingEntity entity) {
-            entity.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, 20, 0, false, false, true));
+            if (entity.isBlocking()) return;
+
+            entity.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, ShieldUtils.getBashStunDuration(), 0, false, false, true));
             entity.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 1, 0.8F);
             entity.damage(this.getDamageSources().generic(), ShieldOverhaul.CONFIG.bash_damage);
             this.setRemoved(RemovalReason.DISCARDED);
