@@ -34,7 +34,7 @@ public class VigorEnchantment extends Enchantment {
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         if(target instanceof LivingEntity livingEntity) {
-            livingEntity.takeKnockback(level * 2, user.getRotationVector().x, user.getRotationVector().y);
+            livingEntity.takeKnockback(level * 0.3, -user.getRotationVector().x, -user.getRotationVector().z);
         }
 
         super.onTargetDamaged(user, target, level);

@@ -79,6 +79,7 @@ public class ShieldUtils {
         player.getWorld().spawnEntity(entity);
 
         Vec3d velocityVector = player.getRotationVector();
+        velocityVector = velocityVector.multiply(ShieldOverhaul.CONFIG.bash_distance_multiplier);
         player.addVelocity(velocityVector.x, velocityVector.y, velocityVector.z);
         player.velocityModified = true;
     }

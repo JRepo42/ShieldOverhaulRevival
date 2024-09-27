@@ -34,6 +34,7 @@ public class ConfigBuilder {
                 configEntries.bash_damage = 0.0F;
                 configEntries.bash_cooldown_secs = 2;
                 configEntries.bash_stun_duration_secs = 1;
+                configEntries.bash_distance_multiplier = 1.0F;
 
                 configEntries.enable_parrying = true;
                 configEntries.enable_bashing = true;
