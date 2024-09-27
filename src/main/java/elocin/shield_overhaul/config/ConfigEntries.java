@@ -18,5 +18,6 @@ public class ConfigEntries {
     public float bash_cooldown_secs = 3.0F;
     public float bash_stun_duration_secs = 1.0F;
     public float bash_distance_multiplier = 1.0F;
+    public float vigor_strength_multiplier_per_level = 0.33F;
 
 }
