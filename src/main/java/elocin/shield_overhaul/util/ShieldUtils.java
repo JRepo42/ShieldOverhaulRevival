@@ -71,10 +71,11 @@ public class ShieldUtils {
         if (player.getWorld().isClient || ShieldOverhaul.CONFIG.bash_only_on_ground && !player.isOnGround()) return;
 
         player.getItemCooldownManager().set(item, ShieldUtils.getBashCooldown());
-        AnimUtils.playParryAnim((ServerWorld) player.getWorld(), player);
+        AnimUtils.playBashAnim((ServerWorld) player.getWorld(), player);
 
         ShieldBashEntity entity = new ShieldBashEntity(player, player.getWorld());
         entity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 2.0F, 0F);
+        entity.setOwner(player);
         player.getWorld().spawnEntity(entity);
 
         Vec3d velocityVector = player.getRotationVector();

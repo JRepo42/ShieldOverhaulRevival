@@ -7,6 +7,7 @@ import com.zigythebird.playeranimatorapi.modifier.CommonModifier;
 import elocin.shield_overhaul.ShieldOverhaul;
 import elocin.shield_overhaul.registry.animation.AnimConstants;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ShieldItem;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 
@@ -17,6 +18,20 @@ public class AnimUtils {
 
     public static void playAnimation(ServerWorld world, PlayerEntity player, Identifier identifier) {
         PlayerAnimAPI.playPlayerAnim(world, player, identifier);
+    }
+
+    public static void playBashAnim(ServerWorld world, PlayerEntity player) {
+        JsonObject json = new JsonObject();
+        CommonModifier mirror = new CommonModifier(AnimConstants.MIRROR, null);
+        List<CommonModifier> modifiers = new ArrayList<>();
+
+        if (player.getOffHandStack().getItem() instanceof ShieldItem) {
+            modifiers.add(mirror);
+        }
+
+        PlayerAnimAPI.playPlayerAnim(world, player, AnimConstants.BASH_RIGHT,
+                PlayerParts.allEnabled, modifiers,
+                0, 1, 1000, true);
     }
 
     public static void playParryAnim(ServerWorld world, PlayerEntity player) {

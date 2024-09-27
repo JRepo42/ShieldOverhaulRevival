@@ -42,6 +42,7 @@ public class ShieldBashEntity extends PersistentProjectileEntity {
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         if (this.getWorld().isClient) return;
+        if (entityHitResult.getEntity() == this.getOwner()) return;
 
         if (entityHitResult.getEntity() instanceof LivingEntity entity) {
             if (entity.isBlocking()) return;
