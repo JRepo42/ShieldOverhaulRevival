@@ -76,7 +76,7 @@ public class ShieldUtils {
 
         if (EnchantmentHelper.getLevel(EnchantmentRegistry.FLAMEBORN, stack) > 0) {
             if (player.getRandom().nextBetween(0, 1) < ShieldOverhaul.CONFIG.flameborn_chance_decimal) {
-                attacker.setOnFireFor((int) (ShieldOverhaul.CONFIG.flameborn_on_fire_time_secs * 20));
+                attacker.setOnFireFor((int) (ShieldOverhaul.CONFIG.flameborn_on_fire_time_secs));
                 enchantmentEnum = EnchantmentEnums.FLAMEBORN;
             }
         }

@@ -36,7 +36,7 @@ public class ParryMechanicsMixin {
 	// Credits to https://github.com/Quplet/NoShieldDelay (MIT Licensed)
 	@ModifyConstant(method = "isBlocking", constant = @Constant(intValue = 5))
 	private int setShieldUseDelay(int constant) {
-		return ShieldOverhaul.CONFIG.enable_instant_shield_use ? 1 : constant;
+		return ShieldOverhaul.CONFIG.enable_instant_shield_use ? 0 : constant;
 	}
 
 	@ModifyExpressionValue(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;blockedByShield(Lnet/minecraft/entity/damage/DamageSource;)Z"))
