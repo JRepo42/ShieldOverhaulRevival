@@ -1,9 +1,6 @@
-package elocin.shield_overhaul.networking;
+package elocin.shield_overhaul.networking.server;
 
-import elocin.shield_overhaul.ShieldOverhaul;
-import elocin.shield_overhaul.util.ShieldUtils;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.network.PacketByteBuf;

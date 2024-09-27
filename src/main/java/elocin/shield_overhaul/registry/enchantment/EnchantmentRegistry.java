@@ -9,8 +9,10 @@ import net.minecraft.util.Identifier;
 
 public class EnchantmentRegistry {
     public static Enchantment VIGOR = new VigorEnchantment();
+    public static Enchantment FLAMEBORN = new FlamebornEnchantment();
 
     public static void initialize() {
         Registry.register(Registries.ENCHANTMENT, new Identifier(ShieldOverhaul.MOD_ID, "vigor"), VIGOR);
+        Registry.register(Registries.ENCHANTMENT, new Identifier(ShieldOverhaul.MOD_ID, "flameborn"), FLAMEBORN);
     }
 }

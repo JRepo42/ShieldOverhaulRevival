@@ -2,7 +2,14 @@ package elocin.shield_overhaul.util;
 
 import elocin.shield_overhaul.ShieldOverhaul;
 import elocin.shield_overhaul.effect.EffectRegistry;
+import elocin.shield_overhaul.networking.PacketRegistry;
+import elocin.shield_overhaul.registry.enchantment.EnchantmentEnums;
+import elocin.shield_overhaul.registry.enchantment.EnchantmentRegistry;
 import elocin.shield_overhaul.registry.entity.ShieldBashEntity;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
@@ -12,6 +19,8 @@ import net.minecraft.entity.mob.WardenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
@@ -61,6 +70,18 @@ public class ShieldUtils {
     public static void stunParry(PlayerEntity player, LivingEntity attacker) {
         player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_ANVIL_LAND, player.getSoundCategory(), 1.0f, 2.0f);
         removeParryCooldown(player);
+        ItemStack stack = getParryStack(player);
+
+        EnchantmentEnums enchantmentEnum = EnchantmentEnums.DEFAULT;
+
+        if (EnchantmentHelper.getLevel(EnchantmentRegistry.FLAMEBORN, stack) > 0) {
+            if (player.getRandom().nextBetween(0, 1) < ShieldOverhaul.CONFIG.flameborn_chance_decimal) {
+                attacker.setOnFireFor((int) (ShieldOverhaul.CONFIG.flameborn_on_fire_time_secs * 20));
+                enchantmentEnum = EnchantmentEnums.FLAMEBORN;
+            }
+        }
+
+        addParryParticles(player, enchantmentEnum);
 
         if (attacker == null || attacker instanceof CreeperEntity) return;
         if (ShieldOverhaul.CONFIG.bosses_immune_to_stun && (attacker instanceof WitherEntity || attacker instanceof WardenEntity || attacker instanceof EnderDragonEntity)) return;
@@ -83,4 +104,26 @@ public class ShieldUtils {
         player.addVelocity(velocityVector.x, velocityVector.y, velocityVector.z);
         player.velocityModified = true;
     }
+
+    public static ItemStack getParryStack(PlayerEntity entity) {
+        ItemStack stack = entity.getMainHandStack();
+
+        if (!ShieldUtils.isParrying(entity.getMainHandStack(), entity)) {
+            stack = entity.getOffHandStack();
+        }
+        return stack;
+    }
+
+    public static void addParryParticles(PlayerEntity entity, EnchantmentEnums enumConstant) {
+        if (entity.getWorld().isClient) return;
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeInt(entity.getId());
+
+        buf.writeEnumConstant(enumConstant);
+
+        for (ServerPlayerEntity player : ((ServerWorld) entity.getWorld()).getPlayers()) {
+            ServerPlayNetworking.send(player, PacketRegistry.PARRY_EFFECT, buf);
+        }
+    }
+
 }

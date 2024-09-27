@@ -1,5 +1,6 @@
 {
   "enchantment.shield_overhaul.vigor": "Vigor",
+  "enchantment.shield_overhaul.flameborn": "Flameborn",
   "effect.shield_overhaul.stun": "Stunned",
   "effect.shield_overhaul.stun.description": "Target is unable to move, use items or attack."
 }

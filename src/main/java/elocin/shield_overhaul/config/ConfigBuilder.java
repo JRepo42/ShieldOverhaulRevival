@@ -36,6 +36,8 @@ public class ConfigBuilder {
                 configEntries.bash_stun_duration_secs = 1;
                 configEntries.bash_distance_multiplier = 1.0F;
                 configEntries.vigor_strength_multiplier_per_level = 0.33F;
+                configEntries.flameborn_chance_decimal = 0.1f;
+                configEntries.flameborn_on_fire_time_secs = 3;
 
                 configEntries.enable_parrying = true;
                 configEntries.enable_bashing = true;

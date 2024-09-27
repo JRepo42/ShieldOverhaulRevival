@@ -19,5 +19,7 @@ public class ConfigEntries {
     public float bash_stun_duration_secs = 1.0F;
     public float bash_distance_multiplier = 1.0F;
     public float vigor_strength_multiplier_per_level = 0.33F;
+    public float flameborn_chance_decimal = 0.1f;
+    public float flameborn_on_fire_time_secs = 3;
 
 }

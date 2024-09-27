@@ -1,6 +1,5 @@
-package elocin.shield_overhaul.networking;
+package elocin.shield_overhaul.networking.client;
 
-import elocin.shield_overhaul.ShieldOverhaul;
 import elocin.shield_overhaul.registry.particle.ParticleRegistry;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
@@ -14,6 +13,7 @@ public class StunParticleS2CPacket {
         if (entity == null) return;
 
         client.execute(() -> {
+
             client.world.addParticle(
                     ParticleRegistry.STUN_STAR,
                     entity.getX(),
