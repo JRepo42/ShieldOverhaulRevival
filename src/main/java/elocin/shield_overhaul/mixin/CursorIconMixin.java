@@ -64,10 +64,10 @@ public class CursorIconMixin {
         int j = this.scaledHeight / 2 - 7 + 16;
         int k = this.scaledWidth / 2 - 8;
 
-        context.drawTexture(SHIELD_ICONS, k + 15 + 20, j - 16, 0, 0, 16, 18);
 
         if (f < 1.0) {
             int l = (int) (f * 16.0f);
+            context.drawTexture(SHIELD_ICONS, k + 15 + 20, j - 16, 0, 0, 16, 18);
             context.drawTexture(SHIELD_ICONS, k + 16 + 20, j - 16, 16, 0, l, 18);
         }
     }
