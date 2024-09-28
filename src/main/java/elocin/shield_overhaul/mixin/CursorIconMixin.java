@@ -50,7 +50,7 @@ public class CursorIconMixin {
         // Bash shield
         if (f < 1.0F) {
             int l = (int) (f * 16.0f);
-            context.drawTexture(SHIELD_ICONS, k - 13 - 20, j - 19, 0, 56, l, 18);
+            context.drawTexture(SHIELD_ICONS, k - 13 - 20, j - 19, 0, 56, 16, 18);
             context.drawTexture(SHIELD_ICONS, k - 13 - 20, j - 19, 16, 56, l, 18);
         }
     }
@@ -58,9 +58,6 @@ public class CursorIconMixin {
     private void drawParryShield(DrawContext context) {
         if (this.client == null) return;
         ItemStack shield = this.client.player.getStackInHand(client.player.getActiveHand());
-        //if (!ShieldUtils.isParrying(shield, client.player)) return;
-
-        //float f = this.client.player.getItemCooldownManager().getCooldownProgress(Items.SHIELD, 0.0F);
 
         float f = UIUtils.getParryProgress(client.player, shield);
 
