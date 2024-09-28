@@ -126,5 +126,4 @@ public class ShieldUtils {
             ServerPlayNetworking.send(player, PacketRegistry.PARRY_EFFECT, buf);
         }
     }
-
 }

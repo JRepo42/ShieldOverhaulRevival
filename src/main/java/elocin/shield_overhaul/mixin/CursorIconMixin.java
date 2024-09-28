@@ -3,6 +3,7 @@ package elocin.shield_overhaul.mixin;
 import com.mojang.blaze3d.systems.RenderSystem;
 import elocin.shield_overhaul.ShieldOverhaul;
 import elocin.shield_overhaul.util.ShieldUtils;
+import elocin.shield_overhaul.util.UIUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -33,7 +34,7 @@ public class CursorIconMixin {
 
     @Inject(at = @At("TAIL"), method = "renderHotbar")
     private void $shield_overhaul_renderHotbar(float tickDelta, DrawContext context, CallbackInfo ci) {
-        if (this.client.options.getAttackIndicator().getValue() == AttackIndicator.CROSSHAIR && this.client.player.isHolding(Items.SHIELD)) {
+        if (this.client.player.isHolding(Items.SHIELD)) {
             drawBashShield(context);
             drawParryShield(context);
         }
@@ -57,13 +58,21 @@ public class CursorIconMixin {
     private void drawParryShield(DrawContext context) {
         if (this.client == null) return;
         ItemStack shield = this.client.player.getStackInHand(client.player.getActiveHand());
-        if (!ShieldUtils.isParrying(shield, client.player)) return;
+        //if (!ShieldUtils.isParrying(shield, client.player)) return;
+
+        //float f = this.client.player.getItemCooldownManager().getCooldownProgress(Items.SHIELD, 0.0F);
+
+        float f = UIUtils.getParryProgress(client.player, shield);
 
         int j = this.scaledHeight / 2 - 7 + 16;
         int k = this.scaledWidth / 2 - 8;
 
         context.drawTexture(SHIELD_ICONS, k + 15 + 20, j - 16, 0, 0, 16, 18);
-        context.drawTexture(SHIELD_ICONS, k + 16 + 20, j - 16, 16, 0, 16, 18);
+
+        if (f < 1.0) {
+            int l = (int) (f * 16.0f);
+            context.drawTexture(SHIELD_ICONS, k + 16 + 20, j - 16, 16, 0, l, 18);
+        }
     }
 
 }
