@@ -52,7 +52,7 @@ public class CursorIconMixin {
         int k = (int) ((this.scaledWidth / 2) * (1 / ShieldOverhaulClient.CLIENT_CONFIG.icon_scale));
 
         // Bash shield
-        if (f < 1.0F) {
+        if (f < 1.0F && f > 0) {
             int l = (int) (f * 16.0f);
             context.drawTexture(SHIELD_ICONS, k + ShieldOverhaulClient.CLIENT_CONFIG.bash_icon_x, j + ShieldOverhaulClient.CLIENT_CONFIG.bash_icon_y, 0, 56, 16, 18);
             context.drawTexture(SHIELD_ICONS, k + ShieldOverhaulClient.CLIENT_CONFIG.bash_icon_x, j + ShieldOverhaulClient.CLIENT_CONFIG.bash_icon_y, 16, 56, l, 18);
@@ -62,6 +62,7 @@ public class CursorIconMixin {
     private void drawParryShield(DrawContext context) {
         if (this.client == null) return;
         ItemStack shield = this.client.player.getStackInHand(client.player.getActiveHand());
+        if (!ShieldUtils.isParrying(shield, client.player)) return;
 
         float f = UIUtils.getParryProgress(client.player, shield);
 
@@ -75,5 +76,4 @@ public class CursorIconMixin {
             context.drawTexture(SHIELD_ICONS, k + ShieldOverhaulClient.CLIENT_CONFIG.parry_icon_x + 1, j + ShieldOverhaulClient.CLIENT_CONFIG.parry_icon_y, 16, 0, l, 18);
         }
     }
-
 }
