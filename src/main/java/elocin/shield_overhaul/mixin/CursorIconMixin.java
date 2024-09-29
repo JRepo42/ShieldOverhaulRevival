@@ -20,7 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InGameHud.class)
 public class CursorIconMixin {
-    private final float ICON_SCALE = 0.8f;
     @Shadow
     private int scaledWidth;
     @Shadow
@@ -38,7 +37,7 @@ public class CursorIconMixin {
     private void $shield_overhaul_renderHotbar(float tickDelta, DrawContext context, CallbackInfo ci) {
         if (this.client.player.isHolding(Items.SHIELD)) {
             context.getMatrices().push();
-            context.getMatrices().scale(ICON_SCALE, ICON_SCALE, ICON_SCALE);
+            context.getMatrices().scale(ShieldOverhaulClient.CLIENT_CONFIG.icon_scale, ShieldOverhaulClient.CLIENT_CONFIG.icon_scale, ShieldOverhaulClient.CLIENT_CONFIG.icon_scale);
             drawBashShield(context);
             drawParryShield(context);
             context.getMatrices().pop();
@@ -49,8 +48,8 @@ public class CursorIconMixin {
     private void drawBashShield(DrawContext context) {
         float f = this.client.player.getItemCooldownManager().getCooldownProgress(Items.SHIELD, 0.0F);
 
-        int j = (int) ((this.scaledHeight / 2) * (1 / ICON_SCALE));
-        int k = (int) ((this.scaledWidth / 2) * (1 / ICON_SCALE));
+        int j = (int) ((this.scaledHeight / 2) * (1 / ShieldOverhaulClient.CLIENT_CONFIG.icon_scale));
+        int k = (int) ((this.scaledWidth / 2) * (1 / ShieldOverhaulClient.CLIENT_CONFIG.icon_scale));
 
         // Bash shield
         if (f < 1.0F) {
@@ -66,8 +65,8 @@ public class CursorIconMixin {
 
         float f = UIUtils.getParryProgress(client.player, shield);
 
-        int j = (int) ((this.scaledHeight / 2) * (1 / ICON_SCALE));
-        int k = (int) ((this.scaledWidth / 2) * (1 / ICON_SCALE));
+        int j = (int) ((this.scaledHeight / 2) * (1 / ShieldOverhaulClient.CLIENT_CONFIG.icon_scale));
+        int k = (int) ((this.scaledWidth / 2) * (1 / ShieldOverhaulClient.CLIENT_CONFIG.icon_scale));
 
 
         if (f < 1.0) {
