@@ -31,9 +31,9 @@ public class ConfigBuilder {
                 configEntries.add_stun_immunity = true;
 
                 configEntries.bash_only_on_ground = true;
-                configEntries.bash_damage = 0.0F;
+                configEntries.bash_damage = 2.0F;
                 configEntries.bash_cooldown_secs = 2;
-                configEntries.bash_stun_duration_secs = 1;
+                configEntries.bash_stun_duration_secs = 0.5f;
                 configEntries.bash_distance_multiplier = 1.0F;
                 configEntries.vigor_strength_multiplier_per_level = 0.33F;
                 configEntries.flameborn_chance_decimal = 0.1f;
