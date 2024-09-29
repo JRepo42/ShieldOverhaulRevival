@@ -21,7 +21,7 @@ public class ClientConfigBuilder {
         try {
             if (Files.notExists(file)) {
                 ClientConfigEntries clientConfigEntries = new ClientConfigEntries();
-                clientConfigEntries.icon_scale = 0.8f;
+                clientConfigEntries.icon_scale = 0.7f;
                 clientConfigEntries.bash_icon_x = -24;
                 clientConfigEntries.bash_icon_y = -8;
                 clientConfigEntries.parry_icon_x = 10;
