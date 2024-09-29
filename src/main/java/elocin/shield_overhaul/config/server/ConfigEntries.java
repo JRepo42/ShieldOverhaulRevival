@@ -1,4 +1,4 @@
-package elocin.shield_overhaul.config;
+package elocin.shield_overhaul.config.server;
 
 import java.util.ArrayList;
 import java.util.List;

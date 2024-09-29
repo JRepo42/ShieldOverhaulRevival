@@ -1,7 +1,7 @@
 package elocin.shield_overhaul;
 
-import elocin.shield_overhaul.config.ConfigBuilder;
-import elocin.shield_overhaul.config.ConfigEntries;
+import elocin.shield_overhaul.config.server.ConfigBuilder;
+import elocin.shield_overhaul.config.server.ConfigEntries;
 import elocin.shield_overhaul.effect.EffectRegistry;
 import elocin.shield_overhaul.networking.PacketRegistry;
 import elocin.shield_overhaul.registry.enchantment.EnchantmentRegistry;

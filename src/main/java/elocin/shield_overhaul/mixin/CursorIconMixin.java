@@ -2,6 +2,7 @@ package elocin.shield_overhaul.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import elocin.shield_overhaul.ShieldOverhaul;
+import elocin.shield_overhaul.ShieldOverhaulClient;
 import elocin.shield_overhaul.util.ShieldUtils;
 import elocin.shield_overhaul.util.UIUtils;
 import net.minecraft.client.MinecraftClient;
@@ -19,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InGameHud.class)
 public class CursorIconMixin {
+    private final float ICON_SCALE = 0.8f;
     @Shadow
     private int scaledWidth;
     @Shadow
@@ -35,8 +37,11 @@ public class CursorIconMixin {
     @Inject(at = @At("TAIL"), method = "renderHotbar")
     private void $shield_overhaul_renderHotbar(float tickDelta, DrawContext context, CallbackInfo ci) {
         if (this.client.player.isHolding(Items.SHIELD)) {
+            context.getMatrices().push();
+            context.getMatrices().scale(ICON_SCALE, ICON_SCALE, ICON_SCALE);
             drawBashShield(context);
             drawParryShield(context);
+            context.getMatrices().pop();
         }
         RenderSystem.defaultBlendFunc();
     }
@@ -44,14 +49,14 @@ public class CursorIconMixin {
     private void drawBashShield(DrawContext context) {
         float f = this.client.player.getItemCooldownManager().getCooldownProgress(Items.SHIELD, 0.0F);
 
-        int j = this.scaledHeight / 2 - 7 + 16;
-        int k = this.scaledWidth / 2 - 8;
+        int j = (int) ((this.scaledHeight / 2) * (1 / ICON_SCALE));
+        int k = (int) ((this.scaledWidth / 2) * (1 / ICON_SCALE));
 
         // Bash shield
         if (f < 1.0F) {
             int l = (int) (f * 16.0f);
-            context.drawTexture(SHIELD_ICONS, k - 13 - 20, j - 19, 0, 56, 16, 18);
-            context.drawTexture(SHIELD_ICONS, k - 13 - 20, j - 19, 16, 56, l, 18);
+            context.drawTexture(SHIELD_ICONS, k + ShieldOverhaulClient.CLIENT_CONFIG.bash_icon_x, j + ShieldOverhaulClient.CLIENT_CONFIG.bash_icon_y, 0, 56, 16, 18);
+            context.drawTexture(SHIELD_ICONS, k + ShieldOverhaulClient.CLIENT_CONFIG.bash_icon_x, j + ShieldOverhaulClient.CLIENT_CONFIG.bash_icon_y, 16, 56, l, 18);
         }
     }
 
@@ -61,14 +66,14 @@ public class CursorIconMixin {
 
         float f = UIUtils.getParryProgress(client.player, shield);
 
-        int j = this.scaledHeight / 2 - 7 + 16;
-        int k = this.scaledWidth / 2 - 8;
+        int j = (int) ((this.scaledHeight / 2) * (1 / ICON_SCALE));
+        int k = (int) ((this.scaledWidth / 2) * (1 / ICON_SCALE));
 
 
         if (f < 1.0) {
             int l = (int) (f * 16.0f);
-            context.drawTexture(SHIELD_ICONS, k + 15 + 20, j - 16, 0, 0, 16, 18);
-            context.drawTexture(SHIELD_ICONS, k + 16 + 20, j - 16, 16, 0, l, 18);
+            context.drawTexture(SHIELD_ICONS, k + ShieldOverhaulClient.CLIENT_CONFIG.parry_icon_x, j + ShieldOverhaulClient.CLIENT_CONFIG.parry_icon_y, 0, 0, 16, 18);
+            context.drawTexture(SHIELD_ICONS, k + ShieldOverhaulClient.CLIENT_CONFIG.parry_icon_x + 1, j + ShieldOverhaulClient.CLIENT_CONFIG.parry_icon_y, 16, 0, l, 18);
         }
     }
 

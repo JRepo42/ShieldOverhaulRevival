@@ -1,4 +1,4 @@
-package elocin.shield_overhaul.config;
+package elocin.shield_overhaul.config.server;
 
 import java.io.IOException;
 import java.nio.file.Files;
