@@ -53,7 +53,7 @@ dependencies {
 
 	modImplementation "maven.modrinth:necronomicon:${project.necronomicon_version}-fabric"
 
-	modImplementation ("com.zigythebird.playeranimatorapi:playeranimatorapi-fabric-1.20.1:2.1.0", {
+	include modImplementation ("com.zigythebird.playeranimatorapi:playeranimatorapi-fabric-1.20.1:2.1.0", {
 		exclude group: "software.bernie.geckolib"
 		exclude group: "com.github.Virtuoel"
 		exclude group: "mod.azure.azurelib"
