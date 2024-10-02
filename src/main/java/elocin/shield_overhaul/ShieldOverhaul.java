@@ -1,7 +1,6 @@
 package elocin.shield_overhaul;
 
-import elocin.shield_overhaul.config.server.ConfigBuilder;
-import elocin.shield_overhaul.config.server.ConfigEntries;
+import elocin.shield_overhaul.config.ConfigLoader;
 import elocin.shield_overhaul.effect.EffectRegistry;
 import elocin.shield_overhaul.networking.PacketRegistry;
 import elocin.shield_overhaul.registry.enchantment.EnchantmentRegistry;
@@ -15,11 +14,11 @@ import org.slf4j.LoggerFactory;
 public class ShieldOverhaul implements ModInitializer {
 	public static final String MOD_ID = "shield_overhaul";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	public static ConfigEntries CONFIG;
 
 	@Override
 	public void onInitialize() {
-		CONFIG = ConfigBuilder.loadConfig();
+		ConfigLoader.register();
+		ConfigLoader.initDatapack(true);
 
 		PacketRegistry.registerC2S();
 		EffectRegistry.initialize();

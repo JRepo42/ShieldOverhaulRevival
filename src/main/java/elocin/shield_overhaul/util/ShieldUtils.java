@@ -1,6 +1,7 @@
 package elocin.shield_overhaul.util;
 
 import elocin.shield_overhaul.ShieldOverhaul;
+import elocin.shield_overhaul.config.server.ShieldConfig;
 import elocin.shield_overhaul.effect.EffectRegistry;
 import elocin.shield_overhaul.networking.PacketRegistry;
 import elocin.shield_overhaul.registry.enchantment.EnchantmentEnums;
@@ -31,28 +32,28 @@ public class ShieldUtils {
     private static final String PARRY_WINDOW = "parry_window";
 
     public static boolean isParrying(ItemStack stack, PlayerEntity player) {
-        if (!ShieldOverhaul.CONFIG.enable_parrying) return false;
+        if (!ShieldConfig.INSTANCE.enable_parrying) return false;
         return getParryWindow(stack) > player.getWorld().getTime();
     }
 
     public static void setParryWindow(ItemStack stack, PlayerEntity player) {
-        if (!ShieldOverhaul.CONFIG.enable_parrying) return;
+        if (!ShieldConfig.INSTANCE.enable_parrying) return;
         stack.getNbt().putLong(PARRY_WINDOW, player.getWorld().getTime() + getParryDuration());
     }
 
     /** Parrying **/
     public static int getParryDuration() {
-        return (int) (ShieldOverhaul.CONFIG.parry_duration_secs * 20);
+        return (int) (ShieldConfig.INSTANCE.parry_duration_secs * 20);
     }
     public static int getParryCooldown() {
-        return (int) (ShieldOverhaul.CONFIG.parry_cooldown_secs * 20);
+        return (int) (ShieldConfig.INSTANCE.parry_cooldown_secs * 20);
     }
-    public static int getParryStunDuration() { return (int) (ShieldOverhaul.CONFIG.parry_stun_duration_secs * 20); }
+    public static int getParryStunDuration() { return (int) (ShieldConfig.INSTANCE.parry_stun_duration_secs * 20); }
 
 
     /** Bashing **/
-    public static int getBashCooldown() { return (int) (ShieldOverhaul.CONFIG.bash_cooldown_secs * 20); }
-    public static int getBashStunDuration() { return (int) (ShieldOverhaul.CONFIG.bash_stun_duration_secs * 20); }
+    public static int getBashCooldown() { return (int) (ShieldConfig.INSTANCE.bash_cooldown_secs * 20); }
+    public static int getBashStunDuration() { return (int) (ShieldConfig.INSTANCE.bash_stun_duration_secs * 20); }
 
 
     public static long getParryWindow(ItemStack stack) {
@@ -76,8 +77,8 @@ public class ShieldUtils {
         EnchantmentEnums enchantmentEnum = EnchantmentEnums.DEFAULT;
 
         if (EnchantmentHelper.getLevel(Enchantments.FIRE_ASPECT, stack) > 0) {
-            if (player.getRandom().nextBetween(0, 1) < ShieldOverhaul.CONFIG.flameborn_chance_decimal) {
-                attacker.setOnFireFor((int) (ShieldOverhaul.CONFIG.flameborn_on_fire_time_secs));
+            if (player.getRandom().nextBetween(0, 1) < ShieldConfig.INSTANCE.flameborn_chance_decimal) {
+                attacker.setOnFireFor((int) (ShieldConfig.INSTANCE.flameborn_on_fire_time_secs));
                 enchantmentEnum = EnchantmentEnums.FLAMEBORN;
             }
         }
@@ -85,12 +86,12 @@ public class ShieldUtils {
         addParryParticles(player, enchantmentEnum);
 
         if (attacker == null || attacker instanceof CreeperEntity) return;
-        if (ShieldOverhaul.CONFIG.bosses_immune_to_stun && (attacker instanceof WitherEntity || attacker instanceof WardenEntity || attacker instanceof EnderDragonEntity)) return;
+        if (ShieldConfig.INSTANCE.bosses_immune_to_stun && (attacker instanceof WitherEntity || attacker instanceof WardenEntity || attacker instanceof EnderDragonEntity)) return;
         attacker.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, ShieldUtils.getParryStunDuration(), 0, false, false));
     }
 
     public static void stunBash(PlayerEntity player, Item item) {
-        if (player.getWorld().isClient || ShieldOverhaul.CONFIG.bash_only_on_ground && !player.isOnGround()) return;
+        if (player.getWorld().isClient || ShieldConfig.INSTANCE.bash_only_on_ground && !player.isOnGround()) return;
 
         player.getItemCooldownManager().set(item, ShieldUtils.getBashCooldown());
         AnimUtils.playBashAnim((ServerWorld) player.getWorld(), player);
@@ -101,7 +102,7 @@ public class ShieldUtils {
         player.getWorld().spawnEntity(entity);
 
         Vec3d velocityVector = player.getRotationVector();
-        velocityVector = velocityVector.multiply(ShieldOverhaul.CONFIG.bash_distance_multiplier);
+        velocityVector = velocityVector.multiply(ShieldConfig.INSTANCE.bash_distance_multiplier);
         player.addVelocity(velocityVector.x, velocityVector.y, velocityVector.z);
         player.velocityModified = true;
     }

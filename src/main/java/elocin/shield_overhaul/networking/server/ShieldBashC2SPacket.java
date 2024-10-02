@@ -1,6 +1,7 @@
 package elocin.shield_overhaul.networking.server;
 
 import elocin.shield_overhaul.ShieldOverhaul;
+import elocin.shield_overhaul.config.server.ShieldConfig;
 import elocin.shield_overhaul.util.ShieldUtils;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,7 @@ public class ShieldBashC2SPacket {
             ItemStack stack = player.getStackInHand(player.getActiveHand());
             if (stack.getNbt() == null) stack.getOrCreateNbt();
             if (!(stack.getItem() instanceof ShieldItem item)) return;
-            if (!ShieldOverhaul.CONFIG.enable_bashing || !player.isBlocking() || ShieldUtils.isParrying(stack, player) || player.getItemCooldownManager().isCoolingDown(item)) return;
+            if (!ShieldConfig.INSTANCE.enable_bashing || !player.isBlocking() || ShieldUtils.isParrying(stack, player) || player.getItemCooldownManager().isCoolingDown(item)) return;
             ShieldUtils.stunBash(player, item);
         });
 

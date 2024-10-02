@@ -1,6 +1,7 @@
 package elocin.shield_overhaul.registry.enchantment;
 
 import elocin.shield_overhaul.ShieldOverhaul;
+import elocin.shield_overhaul.config.server.ShieldConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
@@ -34,7 +35,7 @@ public class VigorEnchantment extends Enchantment {
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level) {
         if(target instanceof LivingEntity livingEntity) {
-            livingEntity.takeKnockback(level * ShieldOverhaul.CONFIG.vigor_strength_multiplier_per_level, -user.getRotationVector().x, -user.getRotationVector().z);
+            livingEntity.takeKnockback(level * ShieldConfig.INSTANCE.vigor_strength_multiplier_per_level, -user.getRotationVector().x, -user.getRotationVector().z);
         }
 
         super.onTargetDamaged(user, target, level);
