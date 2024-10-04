@@ -20,7 +20,7 @@ public abstract class ArrowDeflectionMixin {
     private void shield_overhaul$arrow_deflect(PersistentProjectileEntity instance, Vec3d vec3d, Operation<Void> original, EntityHitResult result) {
         if (result.getEntity() == null || !(result.getEntity() instanceof PlayerEntity player)) return;
 
-        if (!ShieldConfig.INSTANCE.arrow_deflect_requires_parry && player.isBlocking()
+        if (!ShieldConfig.INSTANCE.arrow_deflect_requires_parry && (player.isBlocking() || ShieldUtils.isParrying(ShieldUtils.getParryStack(player), player))
             || (ShieldConfig.INSTANCE.arrow_deflect_requires_parry && ShieldUtils.isParrying(ShieldUtils.getParryStack(player), player))) {
             original.call(instance, player.getRotationVector().multiply(ShieldConfig.INSTANCE.arrow_deflect_velocity_multiplier));
         }
