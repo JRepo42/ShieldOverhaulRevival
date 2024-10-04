@@ -49,6 +49,6 @@ public class AnimUtils {
 
         PlayerAnimAPI.playPlayerAnim(world, player, AnimConstants.PARRY_RIGHT,
                 PlayerParts.allEnabled, modifiers,
-                0, 1, 1000, true);
+                0, 1, 1000, false);
     }
 }

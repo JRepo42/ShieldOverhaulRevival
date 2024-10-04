@@ -22,7 +22,7 @@ public class KeyInputHandler {
                 }
             }
 
-            if (client.options.useKey.isPressed() && client.options.useKey.wasPressed()) {
+            if (client.player.getItemUseTime() == 1 && !stack.getNbt().getBoolean("holdStarted")) {
                 ClientPlayNetworking.send(PacketRegistry.HOLD_BEGIN, PacketByteBufs.empty());
             } else if (!client.options.useKey.isPressed() && stack.getNbt().getBoolean("holdStarted")) {
                 ClientPlayNetworking.send(PacketRegistry.HOLD_END, PacketByteBufs.empty());
