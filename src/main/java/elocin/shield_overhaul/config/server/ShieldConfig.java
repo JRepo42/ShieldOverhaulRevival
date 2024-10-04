@@ -16,6 +16,8 @@ public class ShieldConfig {
     public boolean enable_bashing = true;
     public boolean bash_only_on_ground = true;
     public boolean bosses_immune_to_stun = true;
+    public boolean arrow_deflect_requires_parry = true;
+    public float arrow_deflect_velocity_multiplier = 1.0f;
 
     public float parry_duration_secs = 0.5f;
     public float parry_cooldown_secs = 0.5f;
