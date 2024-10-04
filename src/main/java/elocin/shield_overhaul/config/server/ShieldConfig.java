@@ -26,6 +26,7 @@ public class ShieldConfig {
     public float bash_cooldown_secs = 2.0f;
     public float bash_stun_duration_secs = 1.0f;
     public float bash_distance_multiplier = 2f;
+    public float stun_immunity_duration_secs = 1.0f;
     public float vigor_strength_multiplier_per_level = 0.33f;
     public float flameborn_chance_decimal = 0.25f;
     public int flameborn_on_fire_time_secs = 3;

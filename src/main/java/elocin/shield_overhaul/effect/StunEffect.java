@@ -1,6 +1,7 @@
 package elocin.shield_overhaul.effect;
 
 import elocin.shield_overhaul.networking.PacketRegistry;
+import elocin.shield_overhaul.util.ShieldUtils;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
@@ -8,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -48,4 +50,9 @@ public class StunEffect extends StatusEffect {
         }
     }
 
+    @Override
+    public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
+        super.onRemoved(entity, attributes, amplifier);
+        entity.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN_IMMUNITY, ShieldUtils.getStunImmunityDuration(), 0, false, false, true));
+    }
 }

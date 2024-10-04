@@ -48,7 +48,7 @@ public class ShieldBashEntity extends PersistentProjectileEntity {
         if (entityHitResult.getEntity() instanceof LivingEntity entity) {
             if (entity.isBlocking()) return;
 
-            entity.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, ShieldUtils.getBashStunDuration(), 0, false, false, true));
+            ShieldUtils.applyBashStun(entity);
             entity.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 1, 0.8F);
             entity.damage(this.getDamageSources().generic(), ShieldConfig.INSTANCE.bash_damage);
             this.setRemoved(RemovalReason.DISCARDED);

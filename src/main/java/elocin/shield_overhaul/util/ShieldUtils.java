@@ -55,6 +55,8 @@ public class ShieldUtils {
     public static int getBashCooldown() { return (int) (ShieldConfig.INSTANCE.bash_cooldown_secs * 20); }
     public static int getBashStunDuration() { return (int) (ShieldConfig.INSTANCE.bash_stun_duration_secs * 20); }
 
+    public static int getStunImmunityDuration() { return (int) (ShieldConfig.INSTANCE.stun_immunity_duration_secs * 20); }
+
 
     public static long getParryWindow(ItemStack stack) {
         if (stack.getNbt() == null) return 0;
@@ -87,7 +89,7 @@ public class ShieldUtils {
 
         if (attacker == null || attacker instanceof CreeperEntity) return;
         if (ShieldConfig.INSTANCE.bosses_immune_to_stun && (attacker instanceof WitherEntity || attacker instanceof WardenEntity || attacker instanceof EnderDragonEntity)) return;
-        attacker.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, ShieldUtils.getParryStunDuration(), 0, false, false));
+        ShieldUtils.applyParryStun(attacker);
     }
 
     public static void stunBash(PlayerEntity player, Item item) {
@@ -125,6 +127,18 @@ public class ShieldUtils {
 
         for (ServerPlayerEntity player : ((ServerWorld) entity.getWorld()).getPlayers()) {
             ServerPlayNetworking.send(player, PacketRegistry.PARRY_EFFECT, buf);
+        }
+    }
+
+    public static void applyBashStun(LivingEntity target) {
+        if (!target.hasStatusEffect(EffectRegistry.STUN_IMMUNITY)) {
+            target.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, ShieldUtils.getBashStunDuration(), 0, false, false, true));
+        }
+    }
+
+    public static void applyParryStun(LivingEntity target) {
+        if (!target.hasStatusEffect(EffectRegistry.STUN_IMMUNITY)) {
+            target.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN, ShieldUtils.getParryStunDuration(), 0, false, false, true));
         }
     }
 }

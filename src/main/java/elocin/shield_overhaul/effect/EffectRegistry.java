@@ -14,8 +14,11 @@ public class EffectRegistry {
     ).addAttributeModifier(
     EntityAttributes.GENERIC_ATTACK_DAMAGE, "650f237b-c7b7-47dc-8dd4-7b2ae73dabb2", -1.0, EntityAttributeModifier.Operation.MULTIPLY_TOTAL
     );
+    public static final StatusEffect STUN_IMMUNITY = new StunImmunityEffect();
+
 
     public static void initialize() {
         Registry.register(Registries.STATUS_EFFECT, new Identifier(ShieldOverhaul.MOD_ID, "stun"), STUN);
+        Registry.register(Registries.STATUS_EFFECT, new Identifier(ShieldOverhaul.MOD_ID, "stun_immunity"), STUN_IMMUNITY);
     }
 }
