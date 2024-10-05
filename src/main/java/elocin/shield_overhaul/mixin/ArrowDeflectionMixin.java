@@ -16,7 +16,10 @@ public abstract class ArrowDeflectionMixin {
 
     @WrapOperation(method = "onEntityHit", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/PersistentProjectileEntity;setVelocity(Lnet/minecraft/util/math/Vec3d;)V"))
     private void shield_overhaul$arrow_deflect(PersistentProjectileEntity instance, Vec3d vec3d, Operation<Void> original, EntityHitResult result) {
-        if (result.getEntity() == null || !(result.getEntity() instanceof PlayerEntity player)) return;
+        if (result.getEntity() == null || !(result.getEntity() instanceof PlayerEntity player)) {
+            original.call(instance, vec3d);
+            return;
+        }
 
         if (!ShieldConfig.INSTANCE.arrow_deflect_requires_parry && (player.isBlocking() || ShieldUtils.isParrying(ShieldUtils.getParryStack(player), player))
             || (ShieldConfig.INSTANCE.arrow_deflect_requires_parry && ShieldUtils.isParrying(ShieldUtils.getParryStack(player), player))) {
