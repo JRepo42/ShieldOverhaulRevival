@@ -18,14 +18,4 @@ public class EntityRegistry {
                     .dimensions(EntityDimensions.fixed(2F, 2F)).trackRangeBlocks(4).trackedUpdateRate(10).build());
 
     public static void initialize() {}
-
-    public static void initializeRender() {
-        EntityRendererRegistry.register(EntityRegistry.SHIELD_BASH_ENTITY, (context) ->
-                new ProjectileEntityRenderer<ShieldBashEntity>(context) {
-                    @Override
-                    public Identifier getTexture(ShieldBashEntity entity) {
-                        return new Identifier(ShieldOverhaul.MOD_ID, "textures/misc/shield_bash.png");
-                    }
-                });
-    }
 }
