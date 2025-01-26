@@ -18,8 +18,6 @@ public class KeyInputHandler {
             if (!(stack.getItem() instanceof ShieldItem)) return;
             if (stack.getNbt() == null) return;
 
-            System.out.println(stack.getNbt().getBoolean("holdStarted"));
-
             if (client.player.isBlocking()) {
                 if (client.options.attackKey.isPressed() && client.options.attackKey.wasPressed()) {
                     ClientPlayNetworking.send(PacketRegistry.SHIELD_BASH, PacketByteBufs.empty());
