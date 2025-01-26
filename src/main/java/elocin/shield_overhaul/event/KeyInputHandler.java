@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
+import net.minecraft.nbt.NbtCompound;
 
 public class KeyInputHandler {
 
@@ -15,6 +16,9 @@ public class KeyInputHandler {
             if (client.player == null) return;
             ItemStack stack = client.player.getStackInHand(client.player.getActiveHand());
             if (!(stack.getItem() instanceof ShieldItem)) return;
+            if (stack.getNbt() == null) return;
+
+            System.out.println(stack.getNbt().getBoolean("holdStarted"));
 
             if (client.player.isBlocking()) {
                 if (client.options.attackKey.isPressed() && client.options.attackKey.wasPressed()) {
