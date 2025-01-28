@@ -1,6 +1,7 @@
 package elocin.shield_overhaul.networking;
 
 import elocin.shield_overhaul.ShieldOverhaul;
+import elocin.shield_overhaul.networking.client.AnimationPlayS2CPacket;
 import elocin.shield_overhaul.networking.client.ParryEffectS2CPacket;
 import elocin.shield_overhaul.networking.server.HoldBeginC2SPacket;
 import elocin.shield_overhaul.networking.server.HoldEndC2SPacket;
@@ -17,6 +18,7 @@ public class PacketRegistry {
     public static final Identifier HOLD_END = new Identifier(ShieldOverhaul.MOD_ID, "hold_end_packet");
     public static final Identifier STUN_PARTICLE_PLAY = new Identifier(ShieldOverhaul.MOD_ID, "stun_particle_play_packet");
     public static final Identifier PARRY_EFFECT = new Identifier(ShieldOverhaul.MOD_ID, "parry_effect_packet");
+    public static final Identifier ANIMATION_PLAY = new Identifier(ShieldOverhaul.MOD_ID, "animation_play");
 
 
     public static void registerC2S() {
@@ -28,6 +30,7 @@ public class PacketRegistry {
     public static void registerS2C() {
         ClientPlayNetworking.registerGlobalReceiver(STUN_PARTICLE_PLAY, StunParticleS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(PARRY_EFFECT, ParryEffectS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(ANIMATION_PLAY, AnimationPlayS2CPacket::receive);
     }
 
 }

@@ -2,7 +2,6 @@ package elocin.shield_overhaul.event;
 
 import elocin.shield_overhaul.ShieldOverhaul;
 import elocin.shield_overhaul.networking.PacketRegistry;
-import elocin.shield_overhaul.util.AnimUtils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -21,8 +20,7 @@ public class KeyInputHandler {
 
             if (client.player.isBlocking()) {
                 if (client.options.attackKey.isPressed() && client.options.attackKey.wasPressed()) {
-                    //ClientPlayNetworking.send(PacketRegistry.SHIELD_BASH, PacketByteBufs.empty());
-                    AnimUtils.playAnimation(client.player, "bash_right");
+                    ClientPlayNetworking.send(PacketRegistry.SHIELD_BASH, PacketByteBufs.empty());
                 }
             }
 
