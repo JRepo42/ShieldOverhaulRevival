@@ -1,9 +1,12 @@
 package elocin.shield_overhaul.util;
 
+import dev.kosmx.playerAnim.api.firstPerson.FirstPersonConfiguration;
 import dev.kosmx.playerAnim.api.firstPerson.FirstPersonMode;
 import dev.kosmx.playerAnim.api.layered.KeyframeAnimationPlayer;
+import dev.kosmx.playerAnim.api.layered.modifier.AbstractFadeModifier;
 import dev.kosmx.playerAnim.api.layered.modifier.SpeedModifier;
 import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
+import dev.kosmx.playerAnim.core.util.Ease;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationRegistry;
 import elocin.shield_overhaul.ShieldOverhaul;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -15,15 +18,12 @@ public class AnimUtils {
     private static SpeedModifier SPEED = new SpeedModifier(0.8f);
 
     public static void playAnimation(PlayerEntity user, String animName) {
-        System.out.println(user.getWorld());
-
         var animationContainer = ((IAnimatedPlayer)user).shield_overhaul$getModAnimation();
         KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MOD_ID, animName));
         var builder = anim.mutableCopy();
         anim = builder.build();
         animationContainer.addModifierLast(SPEED);
-        animationContainer.setAnimation(new KeyframeAnimationPlayer(anim).setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL));
-
+        animationContainer.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(5, Ease.LINEAR), new KeyframeAnimationPlayer(anim).setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL).setFirstPersonConfiguration(new FirstPersonConfiguration().setShowRightArm(true)));
     }
 
 
