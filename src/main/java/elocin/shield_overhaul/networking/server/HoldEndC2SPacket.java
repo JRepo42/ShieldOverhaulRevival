@@ -24,7 +24,7 @@ public class HoldEndC2SPacket {
             if (!ShieldConfig.INSTANCE.enable_parrying || player.getItemUseTime() > 5 || ShieldUtils.isParrying(stack, player) || player.getItemCooldownManager().isCoolingDown(item)) return;
             ShieldUtils.setParryWindow(stack, player);
             player.getItemCooldownManager().set(item, ShieldUtils.getParryDuration() + ShieldUtils.getParryCooldown());
-            AnimUtils.playParryAnim(player.getServerWorld(), player);
+            // todo: reinstate AnimUtils.playParryAnim(player.getServerWorld(), player);
         });
 
     }

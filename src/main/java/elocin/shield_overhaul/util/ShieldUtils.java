@@ -93,10 +93,15 @@ public class ShieldUtils {
     }
 
     public static void stunBash(PlayerEntity player, Item item) {
-        if (player.getWorld().isClient || ShieldConfig.INSTANCE.bash_only_on_ground && !player.isOnGround()) return;
+        if (ShieldConfig.INSTANCE.bash_only_on_ground && !player.isOnGround()) return;
+
+
+        //AnimUtils.playBashAnim((ServerWorld) player.getWorld(), player);
+        AnimUtils.playAnimation(player, "bash_right");
+
+        if (player.getWorld().isClient) return;
 
         player.getItemCooldownManager().set(item, ShieldUtils.getBashCooldown());
-        AnimUtils.playBashAnim((ServerWorld) player.getWorld(), player);
 
         ShieldBashEntity entity = new ShieldBashEntity(player, player.getWorld());
         entity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 2.0F, 0F);

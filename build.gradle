@@ -18,11 +18,6 @@ repositories {
 	// for more information about repositories.
 
 	mavenCentral()
-	
-	maven {
-		name "zigythebirdMods"
-		url "https://maven.zigythebird.com/mods"
-	}
 
 	maven {
 		name "KosmX's maven"
@@ -50,17 +45,8 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
 	modImplementation "maven.modrinth:necronomicon:${project.necronomicon_version}-fabric"
-
-	include modImplementation ("com.zigythebird.playeranimatorapi:playeranimatorapi-fabric-1.20.1:2.1.0", {
-		exclude group: "software.bernie.geckolib"
-		exclude group: "com.github.Virtuoel"
-		exclude group: "mod.azure.azurelib"
-		exclude group: "com.eliotlash.mclib"
-		exclude group: "net.fabricmc.fabric-api"
-		exclude group: "maven.modrinth"
-	})
+	include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:1.0.2-rc1+1.20")
 }
 
 processResources {

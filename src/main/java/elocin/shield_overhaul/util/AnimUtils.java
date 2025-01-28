@@ -1,22 +1,33 @@
 package elocin.shield_overhaul.util;
 
-import com.google.gson.JsonObject;
-import com.zigythebird.playeranimatorapi.API.PlayerAnimAPI;
-import com.zigythebird.playeranimatorapi.data.PlayerParts;
-import com.zigythebird.playeranimatorapi.modifier.CommonModifier;
+import dev.kosmx.playerAnim.api.firstPerson.FirstPersonMode;
+import dev.kosmx.playerAnim.api.layered.KeyframeAnimationPlayer;
+import dev.kosmx.playerAnim.api.layered.modifier.SpeedModifier;
+import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
+import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationRegistry;
 import elocin.shield_overhaul.ShieldOverhaul;
-import elocin.shield_overhaul.config.server.ShieldConfig;
-import elocin.shield_overhaul.registry.animation.AnimConstants;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ShieldItem;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AnimUtils {
 
+    private static SpeedModifier SPEED = new SpeedModifier(0.8f);
+
+    public static void playAnimation(PlayerEntity user, String animName) {
+        System.out.println(user.getWorld());
+
+        var animationContainer = ((IAnimatedPlayer)user).shield_overhaul$getModAnimation();
+        KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MOD_ID, animName));
+        var builder = anim.mutableCopy();
+        anim = builder.build();
+        animationContainer.addModifierLast(SPEED);
+        animationContainer.setAnimation(new KeyframeAnimationPlayer(anim).setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL));
+
+    }
+
+
+    /*
     public static void playAnimation(ServerWorld world, PlayerEntity player, Identifier identifier) {
         PlayerAnimAPI.playPlayerAnim(world, player, identifier);
     }
@@ -51,4 +62,6 @@ public class AnimUtils {
                 PlayerParts.allEnabled, modifiers,
                 0, 1, 1000, false);
     }
+
+     */
 }
