@@ -2,7 +2,9 @@ package elocin.shield_overhaul.util;
 
 import dev.kosmx.playerAnim.api.firstPerson.FirstPersonConfiguration;
 import dev.kosmx.playerAnim.api.firstPerson.FirstPersonMode;
+import dev.kosmx.playerAnim.api.layered.IAnimation;
 import dev.kosmx.playerAnim.api.layered.KeyframeAnimationPlayer;
+import dev.kosmx.playerAnim.api.layered.ModifierLayer;
 import dev.kosmx.playerAnim.api.layered.modifier.AbstractFadeModifier;
 import dev.kosmx.playerAnim.api.layered.modifier.SpeedModifier;
 import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
@@ -14,6 +16,7 @@ import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -23,15 +26,29 @@ import net.minecraft.util.math.ChunkPos;
 
 public class AnimUtils {
 
-    private static SpeedModifier SPEED = new SpeedModifier(0.8f);
-
     public static void playAnimation(PlayerEntity user, String animName) {
-        var animationContainer = ((IAnimatedPlayer)user).shield_overhaul$getModAnimation();
-        KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MOD_ID, animName));
-        var builder = anim.mutableCopy();
-        anim = builder.build();
-        animationContainer.addModifierLast(SPEED);
-        animationContainer.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(5, Ease.LINEAR), new KeyframeAnimationPlayer(anim).setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL).setFirstPersonConfiguration(new FirstPersonConfiguration().setShowRightArm(true)));
+        if(user.getWorld().isClient()){
+            var playerAnimationContainer = ((IAnimatedPlayer)user).shield_overhaul$getModAnimation();
+
+
+
+            KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MOD_ID, animName));
+
+            var builder = anim.mutableCopy();
+
+            anim = builder.build();
+
+            var animationContainer = new ModifierLayer<IAnimation>();
+
+            animationContainer.addModifierBefore(new SpeedModifier(0.8f));
+            animationContainer.setAnimation(new KeyframeAnimationPlayer(anim).setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL).setFirstPersonConfiguration(new FirstPersonConfiguration().setShowRightArm(true)));
+            playerAnimationContainer.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(5, Ease.LINEAR), animationContainer);
+
+            //user.getWorld().getPlayers().forEach(playerEntity -> {
+            //    KeyframeAnimationPlayer keyframeAnimationPlayer = ((KeyframeAnimationPlayer)(((IAnimatedPlayer)playerEntity).shield_overhaul$getModAnimation().getAnimation()));
+            //    if(keyframeAnimationPlayer != null)
+            //        System.out.println(keyframeAnimationPlayer + "" + keyframeAnimationPlayer.isActive());} );
+        }
     }
 
     public static void playServerAnimation(PlayerEntity animationUser, String animName) {
