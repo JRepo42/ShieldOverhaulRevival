@@ -30,8 +30,6 @@ public class AnimUtils {
         if(user.getWorld().isClient()){
             var playerAnimationContainer = ((IAnimatedPlayer)user).shield_overhaul$getModAnimation();
 
-
-
             KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MOD_ID, animName));
 
             var builder = anim.mutableCopy();
@@ -44,10 +42,6 @@ public class AnimUtils {
             animationContainer.setAnimation(new KeyframeAnimationPlayer(anim).setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL).setFirstPersonConfiguration(new FirstPersonConfiguration().setShowRightArm(true)));
             playerAnimationContainer.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(5, Ease.LINEAR), animationContainer);
 
-            //user.getWorld().getPlayers().forEach(playerEntity -> {
-            //    KeyframeAnimationPlayer keyframeAnimationPlayer = ((KeyframeAnimationPlayer)(((IAnimatedPlayer)playerEntity).shield_overhaul$getModAnimation().getAnimation()));
-            //    if(keyframeAnimationPlayer != null)
-            //        System.out.println(keyframeAnimationPlayer + "" + keyframeAnimationPlayer.isActive());} );
         }
     }
 
