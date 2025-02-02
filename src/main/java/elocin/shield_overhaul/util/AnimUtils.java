@@ -38,7 +38,7 @@ public class AnimUtils {
 
             var animationContainer = new ModifierLayer<IAnimation>();
 
-            animationContainer.addModifierBefore(new SpeedModifier(0.8f));
+            animationContainer.addModifierBefore(new SpeedModifier(1.0f));
             animationContainer.setAnimation(new KeyframeAnimationPlayer(anim).setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL).setFirstPersonConfiguration(new FirstPersonConfiguration().setShowRightArm(true)));
             playerAnimationContainer.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(5, Ease.LINEAR), animationContainer);
 
