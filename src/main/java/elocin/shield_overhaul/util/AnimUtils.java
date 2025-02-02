@@ -48,15 +48,12 @@ public class AnimUtils {
     public static void playServerAnimation(PlayerEntity animationUser, String animName) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeUuid(animationUser.getUuid());
+        buf.writeString(animName);
 
         for (ServerPlayerEntity target : PlayerLookup.tracking((ServerWorld)animationUser.getWorld(), new ChunkPos((int)animationUser.getPos().x / 16, (int)animationUser.getPos().z / 16))) {
-
-            //buf.writeString(animName);
             if (target != animationUser) {
-                System.out.println("sent");
                 ServerPlayNetworking.send(target, PacketRegistry.ANIMATION_PLAY, buf);
             }
-
         }
     }
 

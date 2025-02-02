@@ -21,7 +21,9 @@ public class KeyInputHandler {
 
             if (client.player.isBlocking()) {
                 if (client.options.attackKey.isPressed() && client.options.attackKey.wasPressed()) {
-                    AnimUtils.playAnimation(client.player, "bash_right");
+                    if (!client.player.getItemCooldownManager().isCoolingDown(stack.getItem())) {
+                        AnimUtils.playAnimation(client.player, "bash_right");
+                    }
                     ClientPlayNetworking.send(PacketRegistry.SHIELD_BASH, PacketByteBufs.empty());
                 }
             }

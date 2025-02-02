@@ -95,14 +95,12 @@ public class ShieldUtils {
     public static void stunBash(PlayerEntity player, Item item) {
         if (ShieldConfig.INSTANCE.bash_only_on_ground && !player.isOnGround()) return;
 
-        //AnimUtils.playBashAnim((ServerWorld) player.getWorld(), player);
         AnimUtils.playServerAnimation(player, "bash_right");
 
         if (player.getWorld().isClient) return;
 
         player.getItemCooldownManager().set(item, ShieldUtils.getBashCooldown());
 
-        /*
         ShieldBashEntity entity = new ShieldBashEntity(player, player.getWorld());
         entity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 2.0F, 0F);
         entity.setOwner(player);
@@ -112,8 +110,6 @@ public class ShieldUtils {
         velocityVector = velocityVector.multiply(ShieldConfig.INSTANCE.bash_distance_multiplier);
         player.addVelocity(velocityVector.x, velocityVector.y, velocityVector.z);
         player.velocityModified = true;
-
-         */
     }
 
     public static ItemStack getParryStack(PlayerEntity entity) {

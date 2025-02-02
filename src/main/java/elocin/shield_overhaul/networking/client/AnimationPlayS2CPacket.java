@@ -13,16 +13,16 @@ import java.util.UUID;
 public class AnimationPlayS2CPacket {
     public static void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         UUID animatedPlayerUUID = buf.readUuid();
-//        String animationName = buf.readString();
+        String animationName = buf.readString();
+
+        if (client.world == null) return;
 
         PlayerEntity animatedPlayer = client.world.getPlayerByUuid(animatedPlayerUUID);
 
         if (animatedPlayer == null) return;
 
-        AnimUtils.playAnimation(animatedPlayer, "bash_right");
-
         client.execute(() -> {
-
+            AnimUtils.playAnimation(animatedPlayer, animationName);
         });
     }
 }
