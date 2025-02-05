@@ -7,6 +7,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.util.Hand;
 
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ public class AnimationPlayS2CPacket {
         if (animatedPlayer == null) return;
 
         client.execute(() -> {
-            AnimUtils.playAnimation(animatedPlayer, animationName);
+            AnimUtils.playAnimation(animatedPlayer, animationName, animatedPlayer.getActiveHand().equals(Hand.OFF_HAND));
         });
     }
 }

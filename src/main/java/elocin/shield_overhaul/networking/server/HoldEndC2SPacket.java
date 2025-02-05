@@ -22,9 +22,9 @@ public class HoldEndC2SPacket {
             if (!(stack.getItem() instanceof ShieldItem item) || !stack.getNbt().getBoolean("holdStarted")) return;
             stack.getNbt().putBoolean("holdStarted", false);
             if (!ShieldConfig.INSTANCE.enable_parrying || player.getItemUseTime() > 5 || ShieldUtils.isParrying(stack, player) || player.getItemCooldownManager().isCoolingDown(item)) return;
+            AnimUtils.playServerAnimation(player, "parry_right");
             ShieldUtils.setParryWindow(stack, player);
             player.getItemCooldownManager().set(item, ShieldUtils.getParryDuration() + ShieldUtils.getParryCooldown());
-            // todo: reinstate AnimUtils.playParryAnim(player.getServerWorld(), player);
         });
 
     }
